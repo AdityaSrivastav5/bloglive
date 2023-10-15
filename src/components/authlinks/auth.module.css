@@ -15,7 +15,7 @@ height: 2px;
 width: 100%;
 background-color: var(--textColor);
 }
-.responsive{
+.responsiveMenu{
     position: absolute;
     top: 100px;
     left: 0px;

@@ -33,13 +33,13 @@ const AuthLinks = () => {
       {open && (
         <div className={styles.responsiveMenu}>
           <Link href="/">Homepage</Link>
-          <Link href="/">About</Link>
-          <Link href="/">Contact</Link>
+          {/* <Link href="/">About</Link> */}
+          <Link href="https://www.instagram.com/tushuoye/">Contact</Link>
           {status === "notauthenticated" ? (
             <Link href="/login">Login</Link>
           ) : (
             <>
-              <Link onClick={()=>console.log("hello")} href="/write1">Write</Link>
+              <Link onClick={()=>console.log("hello")} href="/write">Write</Link>
               <span className={styles.link}>Logout</span>
             </>
           )}

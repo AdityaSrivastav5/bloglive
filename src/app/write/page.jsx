@@ -98,10 +98,7 @@ const WritePage = () => {
 
   return (
     <div className={styles.container}>
-      <p>
-        After clicking the PUBLISH button wait for some time you will be
-        redirected to the post
-      </p>
+
       <input
         type="text"
         placeholder="Title"
