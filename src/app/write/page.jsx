@@ -13,6 +13,8 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { app } from "@/utils/firebase";
+import ReactQuill from "react-quill";
+
 
 const WritePage = () => {
   //   const { status } = useSession();
@@ -140,11 +142,13 @@ router.push("/")
           </div>
         )}
         
+        <ReactQuill
           className={styles.textArea}
           theme="bubble"
           value={value}
           onChange={setValue}
           placeholder="Tell your story..."
+        />
         
       </div>
       <button className={styles.publish} onClick={handleSubmit}>
