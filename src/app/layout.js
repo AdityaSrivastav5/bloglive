@@ -1,11 +1,16 @@
-import Footer from './components/footer/Footer'
-import Navbar from './components/navbar/Navbar'
-import Authprovider from './components/provider/Authprovider'
-// import Themeprovider from './components/provider/Themeprovider'
-import { ThemeContextProvider, Themecontextprovider } from './components/context/Themecontext'
+// // import Footer from './components/footer/Footer'
+// // import Navbar from './components/navbar/Navbar'
+// import Authprovider from './components/provider/Authprovider'
+// // import Themeprovider from './components/provider/Themeprovider'
+// import { ThemeContextProvider, Themecontextprovider } from './components/context/Themecontext'
 import './globals.css'
 import { Inter } from 'next/font/google'
-import Themeprovider from './components/provider/Themeprovider'
+// import Themeprovider from './components/provider/Themeprovider'
+import Authprovider from '@/provider/Authprovider'
+import { ThemeContextProvider } from '@/context/Themecontext'
+import Themeprovider from '@/provider/Themeprovider'
+import Navbar from '@/components/navbar/Navbar'
+import Footer from '@/components/footer/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 

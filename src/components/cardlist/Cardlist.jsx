@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./cardlist.module.css";
-import Pagination from "../pagination/Pagination";
 import Card from "../card/Card";
+import Pagination from "../pagination/Pagination";
+
 
 const getdata = async (page , cat) => {
   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/posts?page=${page}&cat=${cat||""}`, {
@@ -15,7 +16,7 @@ const getdata = async (page , cat) => {
 
 const Cardlist = async ({ page , cat }) => {
   const {posts , count} = await getdata(page , cat);
-  console.log(posts, count);
+  // console.log(posts, count);
   
   const POST_PER_PAGE = 2;
 

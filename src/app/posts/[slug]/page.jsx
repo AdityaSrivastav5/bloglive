@@ -1,8 +1,8 @@
-import React from "react";
-import Menu from "../../components/menu/Menu";
+
+import Comment from "@/components/comment/Comment";
 import styles from "./singlepage.module.css";
 import Image from "next/image";
-import Comment from "../../components/comment/Comment";
+import Menu from "@/components/menu/Menu";
 
 const getdata = async (slug) => {
   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/posts/${slug}?popular=true`, {
@@ -20,7 +20,7 @@ const Singlepage = async({params}) => {
   const {slug} = params;
 
   const data = await getdata(slug);
-  console.log(data)
+  // console.log(data)
   return (
     <div className={styles.container}>
     <div className={styles.infoContainer}>
@@ -51,7 +51,7 @@ const Singlepage = async({params}) => {
           dangerouslySetInnerHTML={{ __html: data?.desc }}
         />
         <div className={styles.comment}>
-          <Comment postSlug={slug}/>
+          <Comment  postSlug={slug}/>
         </div>
       </div>
       <Menu />

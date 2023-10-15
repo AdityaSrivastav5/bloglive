@@ -1,9 +1,8 @@
 import React from "react";
 import styles from "./menu.module.css";
-import Image from "next/image";
-import Link from "next/link";
 import Menupost from "../menupost/Menupost";
 import Menucategory from "../menucategory/Menucategory";
+
 
 function Menu() {
   return (
