@@ -35,12 +35,14 @@ const AuthLinks = () => {
           <Link href="/">Homepage</Link>
           {/* <Link href="/">About</Link> */}
           <Link href="https://www.instagram.com/tushuoye/">Contact</Link>
-          {status === "notauthenticated" ? (
+          {status === "unauthenticated" ? (
             <Link href="/login">Login</Link>
           ) : (
             <>
               <Link onClick={()=>console.log("hello")} href="/write">Write</Link>
-              <span className={styles.link}>Logout</span>
+              <p  onClick={signOut}>
+            Logout
+            </p>
             </>
           )}
         </div>
