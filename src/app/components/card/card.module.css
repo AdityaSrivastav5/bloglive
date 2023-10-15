@@ -1,0 +1,45 @@
+.container{
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    cursor: pointer;
+    
+}
+.imagecontainer{
+    flex: 1;
+
+    position: relative;
+    height: 350px;
+}
+.image{
+    object-fit: cover;
+}
+.textcontainer{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.date{
+    color: gray;
+}
+.category{
+    color: crimson;
+    font-weight: 500;
+}
+.desc{
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--softTextColor);
+}
+.linkme{
+    border-bottom: 1px solid crimson;
+    width: max-content;
+    padding: 2px 0;
+}
+@media screen and (max-width:1280px) {
+    .imagecontainer{
+        display: none;
+    }
+}

@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.btn{
+    color: white;
+    background-color: crimson;
+    padding: 15px 10px;
+    border-radius: 5px;
+    width: 100px;
+    cursor: pointer;
+    text-align: center;
+}
+.button:disabled{
+    background-color:rgba(220 , 20 , 60 , 0.470) ;
+    cursor: not-allowed;
+
+}
