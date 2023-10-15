@@ -13,11 +13,10 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { app } from "@/utils/firebase";
-import ReactQuill from "react-quill";
-
+// import ReactQuill from "react-quill";
+import dynamic from "next/dynamic";
 
 const WritePage = () => {
-  //   const { status } = useSession();
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
@@ -27,88 +26,92 @@ const WritePage = () => {
   const [title, setTitle] = useState("");
   const [catSlug, setCatSlug] = useState("");
 
-  const { status} = useSession()
-  if(status == "loading"){
-<h1>loading...</h1>
-
+  const { status } = useSession();
+  if (status == "loading") {
+    <h1>loading...</h1>;
   }
-  if(status=="unauthenticated"){
-router.push("/")
+  if (status == "unauthenticated") {
+    router.push("/");
   }
 
-    useEffect(() => {
-      const storage = getStorage(app);
-      const upload = () => {
-        const name = new Date().getTime() + file.name;
-        const storageRef = ref(storage, name);
+  useEffect(() => {
+    const storage = getStorage(app);
+    const upload = () => {
+      const name = new Date().getTime() + file.name;
+      const storageRef = ref(storage, name);
 
-        const uploadTask = uploadBytesResumable(storageRef, file);
+      const uploadTask = uploadBytesResumable(storageRef, file);
 
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log("Upload is " + progress + "% done");
-            switch (snapshot.state) {
-              case "paused":
-                console.log("Upload is paused");
-                break;
-              case "running":
-                console.log("Upload is running");
-                break;
-            }
-          },
-          (error) => {},
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              setMedia(downloadURL);
-            });
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
           }
-        );
-      };
-
-      file && upload();
-    }, [file]);
-
-
-    const slugify = (str) =>
-      str
-        .toLowerCase()
-        .trim()
-        .replace(/[^\w\s-]/g, "")
-        .replace(/[\s_-]+/g, "-")
-        .replace(/^-+|-+$/g, "");
-
-    const handleSubmit = async () => {
-      const res = await fetch("/api/posts", {
-        method: "POST",
-        body: JSON.stringify({
-          title,
-          desc: value,
-          img: media,
-          slug: slugify(title),
-          catSlug: catSlug || "style", //If not selected, choose the general category
-        }),
-      })
-
-      if (res.status === 200) {
-        console.log(status)
-        const data = await res.json();
-        router.push(`/posts/${data.slug}`);
-      }
+        },
+        (error) => {},
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setMedia(downloadURL);
+          });
+        }
+      );
     };
+
+    file && upload();
+  }, [file]);
+
+  const slugify = (str) =>
+    str
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+  const handleSubmit = async () => {
+    const res = await fetch("/api/posts", {
+      method: "POST",
+      body: JSON.stringify({
+        title,
+        desc: value,
+        img: media,
+        slug: slugify(title),
+        catSlug: catSlug || "style", //If not selected, choose the general category
+      }),
+    });
+
+    if (res.status === 200) {
+      console.log(status);
+      const data = await res.json();
+      router.push(`/posts/${data.slug}`);
+    }
+  };
 
   return (
     <div className={styles.container}>
-      <p>After clicking the PUBLISH button wait for some time you will be redirected to the post</p>
+      <p>
+        After clicking the PUBLISH button wait for some time you will be
+        redirected to the post
+      </p>
       <input
         type="text"
         placeholder="Title"
         className={styles.input}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <select className={styles.select} onChange={(e) => setCatSlug(e.target.value)}>
+      <select
+        className={styles.select}
+        onChange={(e) => setCatSlug(e.target.value)}
+      >
         <option value="style">style</option>
         <option value="fashion">fashion</option>
         <option value="food">food</option>
@@ -136,25 +139,20 @@ router.push("/")
             <button className={styles.addButton}>
               <Image src="/external.png" alt="" width={16} height={16} />
             </button>
-            {/* <button className={styles.addButton}>
-              <Image src="/video.png" alt="" width={16} height={16} />
-            </button> */}
           </div>
         )}
-        
-        <ReactQuill
-          className={styles.textArea}
-          theme="bubble"
+
+        <input
+          type="text"
+          className={styles.input2}
           value={value}
-          onChange={setValue}
+          onChange={(e) => setValue(e.target.value)}
           placeholder="Tell your story..."
-        />
-        
+        ></input>
       </div>
       <button className={styles.publish} onClick={handleSubmit}>
         Publish
       </button>
-  
     </div>
   );
 };
